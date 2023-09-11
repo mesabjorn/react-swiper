@@ -1,5 +1,6 @@
-import './SwiperItem.css';
-import { SwiperItemType } from '../types';
+import React from 'react';
+import './styles/SwiperItem.css';
+import { SwiperItemType } from './types';
 
 export type Props = SwiperItemType;
 

@@ -1,5 +1,5 @@
 import './App.css';
-import Swiper from './components/Swiper';
+import Swiper from './Swiper';
 
 const items = [
   {
@@ -23,6 +23,7 @@ const items = [
     imageAlt: 'A butterfly on a leaf'
   },
 ];
+
 
 function App() {
   return (

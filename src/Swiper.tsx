@@ -1,11 +1,13 @@
+import React from 'react';
+
 import {useState, useRef } from 'react';
 
-import { SwiperItemType } from '../types';
+import { SwiperItemType } from './types';
 import SwiperItem from './SwiperItem';
 
-import './Swiper.css';
-import { useStateRef, getRefValue } from '../lib/hooks';
-import { getTouchEventData } from '../lib/dom';
+import './styles/Swiper.css';
+import { useStateRef, getRefValue } from './lib/hooks';
+import { getTouchEventData } from './lib/dom';
 
 export type Props = {
   items: Array<SwiperItemType>;
