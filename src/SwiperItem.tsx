@@ -2,30 +2,16 @@ import React from 'react';
 import './styles/SwiperItem.css';
 import { SwiperItemType } from './types';
 
-export type Props = SwiperItemType;
+interface Props {
+  ComponentToRender:React.FunctionComponent<any>,
+  [other:string]: any;
+}
 
-const data = [{
-  title:'A title #1',
-  size:1000,
-}]
-
-const SwiperItem = ({ imageSrc, imageAlt}: Props) => {
-  return (    
-    <li className="swiper-item">
-      <div>
-        <div style={{fontSize: '25pt',textAlign:'center'}}>{imageAlt}</div>
-      {[0,1,2,3,4,5].map((item,i)=>(
-        <img
-        key={i}
-        src={imageSrc}
-        alt={imageAlt}
-        className="swiper-img"
-        draggable={false}
-      />
-      ))}
-      </div>
+const SwiperItem:React.FunctionComponent<Props>  = ({ ComponentToRender,...other}:Props) => {  
+  return (
+    <li className='swiper-item'>
+      {<ComponentToRender {...other}/>}
     </li>
-    
   );
 };
 

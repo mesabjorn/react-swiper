@@ -10,13 +10,14 @@ import { useStateRef, getRefValue } from './lib/hooks';
 import { getTouchEventData } from './lib/dom';
 
 export type Props = {
-  items: Array<SwiperItemType>;
+  ChildComponent: React.FunctionComponent<any>  
+  items: Array<SwiperItemType>  
 };
 
 const MIN_SWIPE_REQUIRED = 40;
 
 
-const Swiper = ({ items }: Props) => {
+const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent }:Props) => {
   const [isSwiping, setIsSwiping] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
 
@@ -115,7 +116,7 @@ const Swiper = ({ items }: Props) => {
         style={{ transform: `translate3d(${offsetX}px,0,0)` }}
       >
         {items.map((item, idx) => (
-          <SwiperItem key={idx} {...item} />
+          <SwiperItem key={idx} ComponentToRender={ChildComponent} {...item} />
         ))}
       </ul>
       <ul className="swiper-indicator">
