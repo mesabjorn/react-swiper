@@ -11,13 +11,14 @@ import { getTouchEventData } from './lib/dom';
 
 export type Props = {
   ChildComponent: React.FunctionComponent<any>  
-  items: Array<SwiperItemType>  
+  items: Array<SwiperItemType>,
+  onSwipe:(page:number)=>void
 };
 
 const MIN_SWIPE_REQUIRED = 40;
 
 
-const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent }:Props) => {
+const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent, onSwipe }:Props) => {
   const [isSwiping, setIsSwiping] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
 
@@ -66,6 +67,7 @@ const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent }:Props) 
       }else{
         newOffsetX = Math.ceil(newOffsetX/containerWidth)*containerWidth;
       }
+      onSwipe(Math.abs(newOffsetX)/containerWidth);
     }
     else{
         newOffsetX = Math.round(newOffsetX/containerWidth)*containerWidth;

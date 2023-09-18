@@ -34,13 +34,14 @@ const MySwiperItem = ({imageSrc,imageAlt}:Props)=>{
   return(
     <>
     <div style={{fontSize: '25pt',textAlign:'center'}}>{imageAlt}</div>
-    {[0,1,2,3,4,5].map((item,i)=>(
+      <h1>Hello world</h1>
+      {[0,1,2,3,4,5].map((item,i)=>(
       <img
-      key={i}
-      src={imageSrc}
-      alt={imageAlt}
-      className="swiper-img"
-      draggable={false}
+        key={i}
+        src={imageSrc}
+        alt={imageAlt}
+        className="swiper-img"
+        draggable={false}
     />
   ))}
   </>)
@@ -49,7 +50,7 @@ const MySwiperItem = ({imageSrc,imageAlt}:Props)=>{
 function App() {
   return (
     <div className="container">
-      <Swiper items={items} ChildComponent={MySwiperItem} />
+      <Swiper items={items} ChildComponent={MySwiperItem} onSwipe={(page)=>{console.log({Swiped:page})}} />
     </div>
   );
 }
