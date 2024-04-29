@@ -12,13 +12,16 @@ import { getTouchEventData } from './lib/dom';
 export type Props = {
   ChildComponent: React.FunctionComponent<any>  
   items: Array<SwiperItemType>,
-  onSwipe:(page:number)=>void
+  onSwipe:(page:number)=>void,
+  onPageChange:(page:number)=>void,
+  childProps:Object,
+  MIN_SWIPE_REQUIRED:number
 };
 
-const MIN_SWIPE_REQUIRED = 40;
+// const MIN_SWIPE_REQUIRED = 40;
 
 
-const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent, onSwipe }:Props) => {
+const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent, onSwipe, childProps, onPageChange=()=>{}, MIN_SWIPE_REQUIRED = 80}:Props) => {
   const [isSwiping, setIsSwiping] = useState(false);
   const [currentIdx, setCurrentIdx] = useState(0);
 
@@ -75,7 +78,6 @@ const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent, onSwipe 
     setIsSwiping(false);
     setOffsetX(newOffsetX);
     setCurrentIdx(Math.abs(newOffsetX / containerWidth));
-
   };
 
   const onTouchMove = (e: TouchEvent | MouseEvent) => {
@@ -104,6 +106,7 @@ const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent, onSwipe 
 
     setCurrentIdx(idx);
     setOffsetX(-(containerWidth * idx));
+    onPageChange(idx);
   };
 
   return (
@@ -118,7 +121,7 @@ const Swiper:React.FunctionComponent<Props> = ({ items, ChildComponent, onSwipe 
         style={{ transform: `translate3d(${offsetX}px,0,0)` }}
       >
         {items.map((item, idx) => (
-          <SwiperItem key={idx} ComponentToRender={ChildComponent} {...item} />
+          <SwiperItem key={idx} ComponentToRender={ChildComponent} {...item} {...childProps} />
         ))}
       </ul>
       <ul className="swiper-indicator">
